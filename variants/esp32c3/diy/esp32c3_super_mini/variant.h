@@ -1,61 +1,47 @@
-#ifndef _VARIANT_ESP32C3_SUPER_MINI_
-#define _VARIANT_ESP32C3_SUPER_MINI_
-
-/*----------------------------------------------------------------------------
- *        Headers
- *----------------------------------------------------------------------------*/
+#ifndef VARIANT_ESP32C3_SUPER_MINI
+#define VARIANT_ESP32C3_SUPER_MINI
 
 #ifdef __cplusplus
 extern "C" {
-#endif // __cplusplus
+#endif 
 
-// I2C (Wire) & OLED
+// 1. I2C & OLED (SDA di Pin 1, SCL di Pin 0)
 #define WIRE_INTERFACES_COUNT (1)
 #define I2C_SDA (1)
 #define I2C_SCL (0)
-
 #define USE_SSD1306
+#define OLED_SDA I2C_SDA
+#define OLED_SCL I2C_SCL
+#define SSD1306_ADDRESS 0x3C
 
-// GPS
+// 2. Buzzer - Menggunakan Pin 20 (Bekas GPS RX)
+#define PIN_BUZZER (20)
+// #define BUZZER_STATE HIGH  // TMB12A03 adalah Active Buzzer
+
+// 3. Matikan GPS agar Pin 20 & 21 bebas
 #undef GPS_RX_PIN
 #undef GPS_TX_PIN
-#define GPS_RX_PIN (20)
-#define GPS_TX_PIN (21)
 
-// Button
-#define BUTTON_PIN (9) // BOOT button
+// 4. Button & Rotary Encoder (Pin 2 & 4)
+#define BUTTON_PIN (9) 
+#define ROTARY_A (2)
+#define ROTARY_B (4)
 
-// LoRa
-#define USE_LLCC68
-#define USE_SX1262
-// #define USE_RF95
-#define USE_SX1268
-
-#define LORA_DIO0 RADIOLIB_NC
+// 5. LoRa (SPI Utama)
+#define USE_RF95
+#define LORA_DIO0 (3)
 #define LORA_RESET (5)
-#define LORA_DIO1 (3)
-#define LORA_RXEN (2)
-#define LORA_BUSY (4)
+#define LORA_DIO1 RADIOLIB_NC
 #define LORA_SCK (10)
 #define LORA_MISO (6)
 #define LORA_MOSI (7)
 #define LORA_CS (8)
 
-#define SX126X_CS LORA_CS
-#define SX126X_DIO1 LORA_DIO1
-#define SX126X_BUSY LORA_BUSY
-#define SX126X_RESET LORA_RESET
-#define SX126X_RXEN LORA_RXEN
-
-#define SX126X_DIO3_TCXO_VOLTAGE (1.8)
-#define TCXO_OPTIONAL // make it so that the firmware can try both TCXO and XTAL
+// Pastikan Pin 2 & 4 tidak bentrok dengan fungsi LoRa
+#undef LORA_RXEN
+#undef LORA_BUSY
 
 #ifdef __cplusplus
 }
 #endif
-
-/*----------------------------------------------------------------------------
- *        Arduino objects - C++ only
- *----------------------------------------------------------------------------*/
-
 #endif
