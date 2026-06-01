@@ -15,27 +15,27 @@ extern "C" {
 #define SSD1306_ADDRESS 0x3C
 
 // 2. Buzzer - Menggunakan Pin 20 (Bekas GPS RX)
-#define PIN_BUZZER (20)
-// #define BUZZER_STATE HIGH  // TMB12A03 adalah Active Buzzer
+#define PIN_BUZZER (21)
+#define BUZZER_STATE HIGH  // TMB12A03 adalah Active Buzzer
 
 // 3. Matikan GPS agar Pin 20 & 21 bebas
 #undef GPS_RX_PIN
 #undef GPS_TX_PIN
 
 // 4. Button & Rotary Encoder (Pin 2 & 4)
-#define BUTTON_PIN (9) 
+#define BUTTON_PIN (10) 
 #define ROTARY_A (2)
 #define ROTARY_B (4)
 
 // 5. LoRa (SPI Utama)
 #define USE_RF95
 #define LORA_DIO0 (3)
-#define LORA_RESET (5)
+#define LORA_RESET (6)
 #define LORA_DIO1 RADIOLIB_NC
-#define LORA_SCK (10)
-#define LORA_MISO (6)
-#define LORA_MOSI (7)
-#define LORA_CS (8)
+#define LORA_SCK (20)
+#define LORA_MISO (7)
+#define LORA_MOSI (8)
+#define LORA_CS (9)
 
 // Pastikan Pin 2 & 4 tidak bentrok dengan fungsi LoRa
 #undef LORA_RXEN
